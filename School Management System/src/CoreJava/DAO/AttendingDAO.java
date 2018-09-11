@@ -2,21 +2,20 @@ package CoreJava.DAO;
 
 import CoreJava.Models.Attending;
 import CoreJava.Models.Course;
-import CoreJava.Models.Student;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class AttendingDAO {
 
-	private List<Attending> attendingList;
+	private List<Attending> attendingList = new ArrayList<Attending>();
 	
 	
 	
@@ -24,7 +23,7 @@ public class AttendingDAO {
     
 	public List<Attending> getAttending(){
 		// make sure path to file is correct for YOUR machine
-    	String attendingCSV = "/Users/frankie/eclipse-workspace/Java_Basics_FinalProject/attending.csv";
+    	String attendingCSV = "/Users/Frankie/eclipse-workspace/JavaBasics_FinalProject/attending.csv";
     	File file = new File(attendingCSV);
     	BufferedReader reader;
     	String attending;
@@ -68,7 +67,7 @@ public class AttendingDAO {
     // method to get a particular student's courses
     List<Course> studentCourseList;
     
-    public List<Course> getStudentCourses(List<Attending> attendingList, String studentEmail){
+    public List<Course> getStudentCourses(List<Course> courseList, List<Attending> attendingList, String studentEmail){
 		for (Attending attending: attendingList) {
     		if ((attending.getStudentEmail()) == studentEmail) {    			
     			for (Course course: CourseDAO.courseList) {
@@ -87,15 +86,25 @@ public class AttendingDAO {
     
     
     
-    // method to get 
+    // method to overwrite the original Attending.csv file
     
-    public void saveAttending(List<Attending> attending){
-    	// make sure path to file is correct for YOUR machine
-    	File file = new File ("/Users/nycda/Desktop/students.csv");
+    public void saveAttending(List<Attending> attendingList){
+    	File attendingCSV = new File("/Users/Frankie/eclipse-workspace/JavaBasics_FinalProject/attending.csv");
+    	attendingCSV.delete();
+    	File newAttendingCSV = new File("/Users/Frankie/eclipse-workspace/JavaBasics_FinalProject/attending.csv");
     	
-    	for (Attending row: attending) {
-    		// FileWriter => row.getCourseID + ',' + row.getStudentEmail + '\n' 
-    	}
+		try {
+			FileWriter writer = new FileWriter(newAttendingCSV, false);
+			for (Attending attending: attendingList) {
+	            writer.write(attending.getCourseID() + "," + attending.getStudentEmail());
+	    	}
+	    	writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
     }
 
 }

@@ -5,6 +5,7 @@ import CoreJava.Models.Student;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 // list all students
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class StudentDAO {
 	
-	private List<Student> studentList;
+	private List<Student> studentList = new ArrayList<Student>();
 	
 	
 	
@@ -22,13 +23,14 @@ public class StudentDAO {
 	
     public List<Student>  getStudents() {
     	// make sure path to file is correct for YOUR machine
-    	String studentsCSV = "/Users/frankie/eclipse-workspace/Java_Basics_FinalProject/students.csv";
+    	String studentsCSV = "/Users/Frankie/eclipse-workspace/JavaBasics_FinalProject/students.csv";
     	File file = new File(studentsCSV);
     	BufferedReader reader;
     	String student;
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			while ((student = reader.readLine()) != null) {
+				System.out.println(student);
 				String[] studentValues = student.split(",");
 				Student theStudent = new Student(studentValues[0], studentValues[1], studentValues[2]);
 				studentList.add(theStudent);
@@ -38,6 +40,7 @@ public class StudentDAO {
 		}
 		return studentList;
     }
+    
     
     
     

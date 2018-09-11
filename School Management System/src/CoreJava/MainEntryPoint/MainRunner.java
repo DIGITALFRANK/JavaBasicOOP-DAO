@@ -22,9 +22,9 @@ public class MainRunner {
             StudentDAO studentDAO = new StudentDAO();
             List<Student> studentList = studentDAO.getStudents();
             System.out.print("Enter your email: ");
-            String email = in.nextLine();
+            String email = in.next();
             System.out.print("Enter your password: ");
-            String password = in.nextLine();
+            String password = in.next();
 
             if(studentDAO.validateUser(studentList, email, password)){
                 CourseDAO courseDAO = new CourseDAO();
@@ -64,7 +64,7 @@ public class MainRunner {
         System.out.println("My Classes: ");
         System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME");
         AttendingDAO attendingDAO = new AttendingDAO();
-        List<Course> courses = attendingDAO.getStudentCourses(attendingList, student.getEmail());
+        List<Course> courses = attendingDAO.getStudentCourses(courseList, attendingList, student.getEmail());
         for(Course course : courses){
             System.out.printf("%-5s|%-25s|%-25s", course.getID(), course.getName(), course.getInstructor());
         }
