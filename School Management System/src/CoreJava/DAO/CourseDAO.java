@@ -1,11 +1,11 @@
 package CoreJava.DAO;
 
 import CoreJava.Models.Course;
-import CoreJava.Models.Student;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 // show all courses
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CourseDAO {
 	
-	static List<Course> courseList;  // static because we will need access to this in the AttendingDAO
+	static List<Course> courseList = new ArrayList<Course>();  // static because we will need access to this in the AttendingDAO
 
 	
 	
@@ -26,7 +26,7 @@ public class CourseDAO {
     	// return courseList outside of while loop
     	
     	// make sure path to file is correct for YOUR machine
-    	String coursesCSV = "/Users/frankie/eclipse-workspace/Java_Basics_FinalProject/courses.csv";
+    	String coursesCSV = "/Users/Frankie/eclipse-workspace/JavaBasics_FinalProject/courses.csv";
     	File file = new File(coursesCSV);
     	BufferedReader reader;
     	String course;
