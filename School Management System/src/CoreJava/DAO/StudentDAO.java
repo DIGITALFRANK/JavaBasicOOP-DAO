@@ -2,7 +2,9 @@ package CoreJava.DAO;
 
 import CoreJava.Models.Student;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
@@ -14,36 +16,23 @@ public class StudentDAO {
 	
 	private List<Student> studentList;
 	
-    public List<Student>  getStudents(){
+    public List<Student>  getStudents() {
     	// make sure path to file is correct for YOUR machine
-    	String fileName = "/Users/nycda/Desktop/students.csv";
-    	File file = new File(fileName);
-
-    	CsvFileReader.readCsvFile(studentList);
-    	// CsvFileReader.readCsvFile(fileName);
-
-    	FileReader fileReader = null;
-    
-	    try {
-	    	
-	    }
-	    catch (Exception e) {
-	        System.out.println("Error in CsvFileReader!");
-	        e.printStackTrace();
-	    } 
-	    finally {
-	
-	        try {
-	            //fileWriter.flush();
-	            fileReader.close();
-	            
-	        } 
-	        catch (Exception e) {
-	            System.out.println("Error while closing fileReader!");
-	            e.printStackTrace();
-	        }
+    	String studentsCSV = "/Users/frankie/eclipse-workspace/Java_Basics_FinalProject/students.csv";
+    	File file = new File(studentsCSV);
+    	BufferedReader reader;
+    	String student;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			while ((student = reader.readLine()) != null) {
+				String[] studentValues = student.split(",");
+				Student theStudent = new Student(studentValues[0], studentValues[1], studentValues[2]);
+				studentList.add(theStudent);
+	    	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return studentList;
-	    }
     }
     
     
