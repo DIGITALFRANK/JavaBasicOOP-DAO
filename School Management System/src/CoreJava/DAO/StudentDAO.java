@@ -4,7 +4,6 @@ import CoreJava.Models.Student;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
@@ -15,6 +14,11 @@ import java.util.List;
 public class StudentDAO {
 	
 	private List<Student> studentList;
+	
+	
+	
+	
+	// method to retrieve all students in the form of a list of Student objects
 	
     public List<Student>  getStudents() {
     	// make sure path to file is correct for YOUR machine
@@ -38,31 +42,36 @@ public class StudentDAO {
     
     
     
-
+    // method to retrieve specific student from the list by their email
+    
     public Student getStudentByEmail(List<Student> studentList, String studentEmail){
     	for (Student student: studentList) {
-    		
+    		if (studentEmail.equals(student.getEmail())) {
+                System.out.println("Login Successful!");
+                return student;
+            }
     	}
-    	
-    	
 		return null;
     }
     
     
     
+    
+    
+    // validate student is in the list by their email and password
 
     public boolean validateUser(List<Student> studentList, String studentEmail, String studentPass) {
     	for (Student student: studentList) {
-    		if((studentEmail).equals(student.getEmail()) && (studentPass).equals(student.getPass())) {
-        		// if((studentEmail == setEmail) && (studentPass == setPass)) {
+    		if (studentEmail.equals(student.getEmail()) && studentPass.equals(student.getPass())) {
                 System.out.println("Login Successful!");
                 return true;
             }
-            else{
+            else {
                 System.out.println("Incorrect username or password");
                 return false;
             }
-    	}	
+    	}
+    	return false;
     } 
     
 }
