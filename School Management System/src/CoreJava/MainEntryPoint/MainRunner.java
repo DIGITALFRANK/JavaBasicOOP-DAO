@@ -64,7 +64,7 @@ public class MainRunner {
         System.out.println("My Classes: ");
         System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME");
         AttendingDAO attendingDAO = new AttendingDAO();
-        List<Course> courses = attendingDAO.getStudentCourses(courseList, attendingList, student.getEmail());
+        List<Course> courses = attendingDAO.getStudentCourses(attendingList, student.getEmail());
         for(Course course : courses){
             System.out.printf("%-5s|%-25s|%-25s", course.getID(), course.getName(), course.getInstructor());
         }
